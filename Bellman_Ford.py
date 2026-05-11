@@ -7,15 +7,24 @@ from math import *
 
 class bellmanford:
     
-    def __init__(self, adjacency, type='max'):
+    def __init__(self, adjacency, storage_costs, type='max'):
         self.graph = adjacency
+        self.node_weights = storage_costs
         self.type = type
         self.best_paths = {}
 
-    
+    #Currently doesn't include storage costs
     def best_path(self, node, index, length):
         d = [inf for i in len(node)]
         d[index] = 0
+        
+        
+
+
+
+
+        return d
+
 
     def get_all_paths(self):
         for i, node in enumerate(self.graph):
@@ -29,6 +38,8 @@ class bellmanford:
 
 
     def main(self):
-        pass
+
+        self.get_all_paths
+        return self.best_paths
 
 
