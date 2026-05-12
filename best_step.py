@@ -1,4 +1,10 @@
 
+"""
+Quick greedy algorithm that takes best path for x number of steps
+
+TODO: Add storage costs to algorithm
+"""
+
 from Adjacency_lists import *
 from math import *
 
