@@ -30,8 +30,8 @@ class best_step:
         else:
             local_max = {"name":"MJA", "max": -inf}
             for key in self.graph[position]:
-                if self.graph[position][key] > local_max["max"]:
-                    local_max['max'] = self.graph[position][key]
+                if self.graph[position][key] > local_max["max"] - storage_costs[key]:
+                    local_max['max'] = self.graph[position][key] - storage_costs[key]
                     local_max['name'] = key
             path.append(local_max['name'])
             best += local_max['max']

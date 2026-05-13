@@ -24,8 +24,8 @@ class bellmanford:
             i += 1
             for u in d:
                 if u in self.graph[v]:
-                    if d[u] < self.graph[v][u] + d[v]:
-                        d[u] = self.graph[v][u] + d[v]
+                    if d[u] < self.graph[v][u] + d[v] - storage_costs[u]:
+                        d[u] = self.graph[v][u] + d[v] - storage_costs[u]
                         if i == len(self.graph):
                             #print("Positive cost cycle found") 
                             pass           
