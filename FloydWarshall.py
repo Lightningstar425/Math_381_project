@@ -67,6 +67,6 @@ class FloydWarshall:
 
 
 if __name__ == "__main__":
-    fw = floydwarshall(adjacency, storage_costs, "max")
+    fw = FloydWarshall(adjacency, storage_costs, "max")
     distances = fw.main()
     fw.parse(distances)

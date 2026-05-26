@@ -3,7 +3,6 @@ Changing edge weights based on last flights, each path has an auto lock for a pl
 """
 
 from dataclasses import dataclass
-import random
 
 @dataclass
 class Node:
@@ -38,6 +37,8 @@ class adjusting_graph:
 
 
     def build_graph(self): 
+
+        """Nodes were generated with AI for fast creation of data, no code logic was built with AI"""
         # ── BOS · Boston Logan ────────────────────────────────────────
         bos_edges = {
             "JFK": Edge(lambda t: min(t, 150) * 230 - 1160,  120, 1, False),
@@ -296,7 +297,8 @@ class adjusting_graph:
             for edge in self.graph[node].edges:
                 self.graph[node].edges[edge].in_use = False
                 self.graph[node].edges[edge].tickets_sold += int(self.graph[node].people / len(self.graph[node].edges))
-
+        
+        return self
 
 
     #Assumes flying u to v
@@ -319,10 +321,14 @@ class adjusting_graph:
 
     def get_graph(self):
         return self.graph
+    
+    #get edges
+    def get_edges(self, v):
+        return self.graph[v].edges
 
 if __name__ == "__main__":
     graph = adjusting_graph()
     graph.build_graph()
     print(graph.get_edge_gain('BOS', "JFK"))
     graph.update()
-    print(graph.get_edge_gain('BOS', "JFK"))
+    print(graph.get_edges('BOS'))

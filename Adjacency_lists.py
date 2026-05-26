@@ -1,3 +1,6 @@
+
+"""Data generated with AI for fast creation of data, no code logic was built with AI"""
+
 # Storage costs per day
 
 storage_costs = {
