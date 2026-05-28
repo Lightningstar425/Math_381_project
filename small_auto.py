@@ -174,6 +174,63 @@ class small_auto:
     #get edges
     def get_edges(self, v):
         return self.graph[v].edges
+    
+    ##used in updating heuristic graphs #
+    # removes people
+    def set_people(self, u, v):
+        tickets = self.graph[u].edges[v].tickets_sold
+        self.graph[u].people -= min(150, tickets)
+
+        self.graph[u].edges[v].tickets_sold -= min(150, tickets)
+
+    #restricts a flight time
+    def restrict_route(self, u, v):
+        self.graph[u].edges[v].in_use = True
+
+    #used to apply the above restrictions held in daily_graph (x_plane_greedy uses this)
+    def apply_restrictions(self, daily_graph):
+        for node in self.graph:
+            for edge in self.graph[node].edges:
+                if daily_graph.graph[node].edges[edge].in_use:
+                    self.graph[node].edges[edge].in_use = True
+
+
+    def print_graph(self):
+
+        print("\n========== GRAPH STATE ==========\n")
+
+        for node_name, node in self.graph.items():
+
+            print(f"Airport: {node_name}")
+            print(f"  People: {node.people}")
+            print(f"  Storage Cost: {node.storage_cost}")
+            print(f"  Planes: {node.num_planes}")
+
+            try:
+                ground = node.ground_time(node.people)
+            except:
+                ground = "N/A"
+
+            print(f"  Ground Time: {ground}")
+
+            print("  Routes:")
+
+            for dest, edge in node.edges.items():
+
+                profit = edge.gain(edge.tickets_sold)
+
+                print(
+                    f"    -> {dest}"
+                    f" | Tickets: {edge.tickets_sold}"
+                    f" | Flight Time: {edge.flight_time}"
+                    f" | In Use: {edge.in_use}"
+                    f" | Profit: {profit}"
+                )
+
+            print()
+
+        print("=================================\n")
+
 
 if __name__ == "__main__":
     graph = small_auto()

@@ -13,7 +13,7 @@ there is no good route left/there is not enough time remaining in the day.
 """
 
 from Auto_adjusting_adjacency_lists import adjusting_graph
-
+from small_auto import *
 
 class OnePlaneHeuristic:
     def __init__(self, graph, days=21, max_hours=16):
@@ -22,7 +22,7 @@ class OnePlaneHeuristic:
         self.max_hours = max_hours
 
     def storage_cost_for_hours(self, airport, hours):
-        return self.graph.get_storage_cost(airport) * hours / 24
+        return self.graph.get_storage_cost(airport) #* hours / 24
 
     def flight_and_ground_time(self, start, dest):
         flight_time = self.graph.get_flight_time(start, dest)
@@ -156,10 +156,10 @@ class OnePlaneHeuristic:
 
 
 if __name__ == "__main__":
-    graph = adjusting_graph()
+    graph = small_auto()
     graph.build_graph()
-    solver = OnePlaneHeuristic(graph, days=21, max_hours=16)
-    total_gain, history = solver.simulate("SEA")
+    solver = OnePlaneHeuristic(graph, days=5, max_hours=16)
+    total_gain, history = solver.simulate("LAX")
     print("Total gain:", total_gain)
     for step in history:
         print(step)
