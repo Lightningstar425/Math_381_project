@@ -13,15 +13,16 @@ class exhaustive_search:
         self.planes = planes
 
     def get_actions(self, position, graph):
-        """All actions for one plane: wait, or fly to any available neighbor"""
-        actions = [(position, position)]  # wait
+        #wait
+        actions = [(position, position)]
+
+        #fly
         for k in graph.get_edges(position):
             if not graph.can_fly(position, k):
                 actions.append((position, k))
         return actions
 
     def is_valid(self, joint_action):
-        """No two planes can share the same edge on the same day"""
         edges = [(src, dst) for src, dst in joint_action if src != dst]
         return len(edges) == len(set(edges))
 

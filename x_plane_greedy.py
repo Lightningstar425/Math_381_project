@@ -19,7 +19,7 @@ class greedy_sequential:
             for prev in prev_paths:
                 u, v = prev[steps], prev[steps + 1]
                 if u != v:
-                    restricted.set_flown(u, v)  # apply prev planes' last flights
+                    restricted.set_flown(u, v)  
 
             best_profit = -restricted.get_storage_cost(start)
             best_move = current_path
@@ -35,7 +35,7 @@ class greedy_sequential:
 
         # wait
         wait_graph = copy.deepcopy(graph)
-        for prev in prev_paths:          # apply prev planes' flights this step
+        for prev in prev_paths:          
             u, v = prev[steps], prev[steps + 1]
             if u != v:
                 wait_graph.set_flown(u, v)
@@ -47,12 +47,12 @@ class greedy_sequential:
         # fly
         for k in graph.get_edges(start):
             fly_graph = copy.deepcopy(graph)
-            for prev in prev_paths:      # apply prev planes' flights this step
+            for prev in prev_paths:     
                 u, v = prev[steps], prev[steps + 1]
                 if u != v:
                     fly_graph.set_flown(u, v)
 
-            if not fly_graph.can_fly(start, k):  # k not taken by a prev plane
+            if not fly_graph.can_fly(start, k):  
                 edge_gain = graph.get_edge_gain(start, k) - graph.get_storage_cost(k)
                 fly_graph.set_flown(start, k)
                 fly_graph.update()
