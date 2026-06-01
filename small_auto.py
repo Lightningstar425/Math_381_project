@@ -1,5 +1,7 @@
 """
 Changing edge weights based on last flights, each path has an auto lock for a plane
+
+-Marie Andken
 """
 
 from dataclasses import dataclass
@@ -193,43 +195,12 @@ class small_auto:
             for edge in self.graph[node].edges:
                 if daily_graph.graph[node].edges[edge].in_use:
                     self.graph[node].edges[edge].in_use = True
+    
+    def apply_depletion(self, depletion):
+        for airport, removed in depletion.items():
+            self.graph[airport].people = max(0, self.graph[airport].people - removed)
 
 
-    def print_graph(self):
-
-        print("\n========== GRAPH STATE ==========\n")
-
-        for node_name, node in self.graph.items():
-
-            print(f"Airport: {node_name}")
-            print(f"  People: {node.people}")
-            print(f"  Storage Cost: {node.storage_cost}")
-            print(f"  Planes: {node.num_planes}")
-
-            try:
-                ground = node.ground_time(node.people)
-            except:
-                ground = "N/A"
-
-            print(f"  Ground Time: {ground}")
-
-            print("  Routes:")
-
-            for dest, edge in node.edges.items():
-
-                profit = edge.gain(edge.tickets_sold)
-
-                print(
-                    f"    -> {dest}"
-                    f" | Tickets: {edge.tickets_sold}"
-                    f" | Flight Time: {edge.flight_time}"
-                    f" | In Use: {edge.in_use}"
-                    f" | Profit: {profit}"
-                )
-
-            print()
-
-        print("=================================\n")
 
 
 if __name__ == "__main__":
