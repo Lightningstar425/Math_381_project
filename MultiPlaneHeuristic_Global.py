@@ -235,6 +235,18 @@ if __name__ == "__main__":
     graph.build_graph()
     solver = MultiPlaneHeuristic_Global(graph, num_planes=3, days=20, max_hours=16)
     total_gain, history = solver.simulate("SEA")
-    print("Total gain:", total_gain)
     for step in history:
         print(step)
+    print("Total gain:", total_gain)
+    for plane in [1, 2, 3]:
+        route_path = []
+
+        for step in history:
+            if step["plane"] == plane and step["action"] == "FLY":
+                if not route_path:
+                    route_path.append(step["start"])
+                route_path.append(step["end"])
+
+        print(f"\nPlane {plane}:")
+        print(f"Flights: {max(0, len(route_path) - 1)}")
+        print(" -> ".join(route_path))

@@ -1,6 +1,6 @@
 # Exhaustive Search
 
-Brute-force solver that finds the optimal flight schedule for a small fleet of planes over a fixed number of days. Tries every possible combination of routes and starting airports to guarantee the best result.
+Brute-force to find optimal paths
 
 ## Usage
 
@@ -19,7 +19,9 @@ if __name__ == "__main__":
 - `planes` — number of aircraft
 - `days` — length of the scheduling horizon
 
-#
+## MultiPlaneHeuristic_Global
+
+Finds best joint plane movement for each day
 
 ## Usage
 
