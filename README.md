@@ -1,0 +1,33 @@
+## How to Run the Multi-Plane Heuristic
+
+The main function creates the graph, builds the route network, runs the global greedy heuristic, and prints the simulation result.
+
+python solver = MultiPlaneHeuristic_Global(     graph,     num_planes=10,     days=21,     max_hours=16 ) total_gain, history = solver.simulate("SEA") 
+
+You can change num_planes to control how many planes are used in the simulation. For example, num_planes=10 means the algorithm schedules 10 planes.
+
+You can change days to control how many days the simulation runs. In this example, days=21 means the algorithm runs for 21 days.
+
+You can change max_hours to control the maximum number of operating hours each plane has per day. In this example, each plane can fly for at most 16 hours per day.
+
+You can change the starting airport by modifying:
+
+python solver.simulate("SEA") 
+
+For example, using solver.simulate("JFK") starts all planes at JFK instead of SEA.
+
+The code also prints the full flight history:
+
+python for step in history:     print(step) 
+
+Each printed step shows the day, plane number, route, score, gain, time used, and remaining hours.
+
+At the end, the code prints the path history for the first three planes:
+
+python for plane in [1, 2, 3]: 
+
+To view more planes, change this list. For example, use [1, 2, 3, 4, 5] to show the paths for the first five planes.
+
+The path output summarizes each selected plane’s route sequence, such as:
+
+text Plane 1: Flights: 12 SEA -> JFK -> ORD -> SEA
